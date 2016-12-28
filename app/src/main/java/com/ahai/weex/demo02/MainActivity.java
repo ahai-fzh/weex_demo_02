@@ -16,6 +16,9 @@ import com.taobao.weex.utils.WXFileUtils;
 
 public class MainActivity extends AppCompatActivity {
 
+    final String BASE_URL = "http://30.96.224.23:8080/weex/";
+    String path1 = "ahai/test.js";
+    String path2 = "ahai/anjuke.js";
     WXSDKInstance wxsdkInstance;
 
     @Override
@@ -23,13 +26,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initWeexSdkInstance();
+//        renderLocalJs();
+        renderRemoteJs();
     }
 
     private void initWeexSdkInstance() {
         wxsdkInstance = new WXSDKInstance(this);
         wxsdkInstance.registerRenderListener(renderListener);
+    }
+
+    private void renderLocalJs() {
         String content = WXFileUtils.loadAsset("hello.js", this);
-        wxsdkInstance.render("wx_sample", content, null, null, -1, -1, WXRenderStrategy.APPEND_ASYNC);
+        wxsdkInstance.render(getPageName(), content, null, null, -1, -1, WXRenderStrategy.APPEND_ASYNC);
+    }
+
+    private void renderRemoteJs() {
+        String url = BASE_URL + path2;
+        wxsdkInstance.renderByUrl(getPageName(), url, null, null,
+                getResources().getDisplayMetrics().widthPixels, -1, WXRenderStrategy.APPEND_ASYNC);
+        // 宽度-1改成getResources().getDisplayMetrics().widthPixels否则在android手机上ui显示不正常。
     }
 
     @Override
@@ -85,4 +100,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+
+    private String getPageName() {
+        return "weex_demo_02";
+    }
 }

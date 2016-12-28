@@ -2,6 +2,7 @@ package com.ahai.weex.demo02;
 
 import android.app.Application;
 
+import com.alibaba.weex.commons.adapter.ImageAdapter;
 import com.taobao.weex.InitConfig;
 import com.taobao.weex.WXSDKEngine;
 

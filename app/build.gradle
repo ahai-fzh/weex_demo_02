@@ -10,6 +10,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk{
+            abiFilters "x86"
+            abiFilters "armeabi"
+        }
     }
     buildTypes {
         release {
@@ -27,8 +31,12 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
     compile project(':weex_sdk')
+    compile project(':weex_commons')
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:recyclerview-v7:25.1.0'
     compile 'com.android.support:support-v4:25.1.0'
     compile 'com.alibaba:fastjson:1.2.23'
+
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.facebook.fresco:fresco:0.10.0'
 }
